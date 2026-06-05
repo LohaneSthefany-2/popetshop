@@ -1,3 +1,4 @@
+@php use Illuminate\Support\Facades\Auth; @endphp
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -36,13 +37,10 @@
                     Painel de Controle
                 </span>
 
-                @if(session('usuario'))
 
                 <h2 class="text-5xl font-black text-white mt-4 drop-shadow-lg">
-                    Olá, {{ session('usuario')->name }}!
+                    Bem vindo(a), {{ Auth::user()->name }}! 
                 </h2>
-
-                @endif
 
                 <p class="text-pink-100 text-lg font-semibold mt-2">
                     Gerencie o petshop!

@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -15,21 +14,24 @@ class LoginController extends Controller
 
     public function autenticar(Request $request)
     {
-        $usuario = DB::table('users')
-            ->where('email', $request->email)
-            ->first();
+        $credenciais = [
+            'email' => $request->email,
+            'password' => $request->senha,
+        ];
 
-        if ($usuario && Hash::check($request->senha, $usuario->password)) {
-            session(['usuario' => $usuario]);
+        if (Auth::attempt($credenciais)) {
+            $request->session()->regenerate();
             return redirect('/painel');
         }
 
         return redirect('/login')->with('erro', 'Email ou senha incorretos!');
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
-        session()->flush();
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
         return redirect('/login');
     }
 }
