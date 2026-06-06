@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Pet;
+use Illuminate\Support\Facades\Storage;
 
 class PetController extends Controller
 {
@@ -20,7 +21,16 @@ class PetController extends Controller
 
     public function store(Request $request)
     {
-        Pet::create($request->all());
+        $dados = $request->all();
+
+        // Verifica se o usuário enviou uma foto válida
+        if ($request->hasFile('foto') && $request->file('foto')->isValid()) {
+            // Salva a imagem na pasta public/storage/pets
+            $caminhoFoto = $request->foto->store('pets', 'public');
+            $dados['foto'] = $caminhoFoto;
+        }
+
+        Pet::create($dados);
         return redirect('/pets');
     }
 
@@ -33,13 +43,29 @@ class PetController extends Controller
     public function update(Request $request, $id)
     {
         $pet = Pet::findOrFail($id);
-        $pet->update($request->all());
+        $dados = $request->all();
+
+        if ($request->hasFile('foto') && $request->file('foto')->isValid()) {
+            if ($pet->foto) {
+                Storage::disk('public')->delete($pet->foto);
+            }
+            $caminhoFoto = $request->foto->store('pets', 'public');
+            $dados['foto'] = $caminhoFoto;
+        }
+
+        $pet->update($dados);
         return redirect('/pets');
     }
 
     public function destroy($id)
     {
-        Pet::findOrFail($id)->delete();
+        $pet = Pet::findOrFail($id);
+
+        if ($pet->foto) {
+            Storage::disk('public')->delete($pet->foto);
+        }
+
+        $pet->delete();
         return redirect('/pets');
     }
 }

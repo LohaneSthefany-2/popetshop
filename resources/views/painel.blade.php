@@ -12,7 +12,7 @@
 
 <body class="min-h-screen relative overflow-x-hidden">
 
-    <img src="/fundopainel.jpg"
+    <img src="/images/fundopainel.jpg"
         class="fixed inset-0 w-full h-full object-cover z-0"
         alt="Fundo">
 

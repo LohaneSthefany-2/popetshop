@@ -13,6 +13,7 @@ return new class extends Migration
             $table->string('nomepet');
             $table->string('dono');
             $table->string('tipo');
+            $table->string('foto')->nullable();
             $table->timestamps();
         });
     }
