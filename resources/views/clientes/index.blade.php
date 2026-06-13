@@ -6,7 +6,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .bg-custom {
-            background-image: url('/images/cadastrarpets.jpg');
+            background-image: url('/images/listarcliente.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
