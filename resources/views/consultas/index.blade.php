@@ -17,7 +17,7 @@
     
     <nav class="bg-white/90 backdrop-blur-sm shadow-md p-5 flex justify-between items-center border-b-2 border-pink-100">
         <h1 class="text-2xl font-black text-pink-500 tracking-wide drop-shadow-sm">Petshop</h1>
-        <a href="/painel" class="text-gray-500 hover:text-pink-500 font-medium transition-all hover:scale-105">Voltar ao Painel</a>
+        <a href="/dashboard" class="text-gray-500 hover:text-pink-500 font-medium transition-all hover:scale-105">Voltar ao Painel</a>
     </nav>
 
     <div class="p-10">

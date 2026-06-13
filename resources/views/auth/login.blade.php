@@ -10,9 +10,11 @@
         <h1 class="text-4xl font-bold text-pink-500 text-center mb-2"> Petshop</h1>
         <p class="text-center text-gray-400 mb-8">Faça login para continuar</p>
 
-        @if(session('erro'))
-            <div class="bg-red-100 text-red-600 p-3 rounded-xl mb-5 text-center">
-                {{ session('erro') }}
+        @if ($errors->any())
+            <div class="bg-red-100 text-red-600 p-3 rounded-xl mb-5 text-center text-sm">
+                @foreach ($errors->all() as $error)
+                    <p>{{ $error }}</p>
+                @endforeach
             </div>
         @endif
 
@@ -23,17 +25,19 @@
                 <input
                     type="email"
                     name="email"
+                    value="{{ old('email') }}"
                     placeholder="Digite seu email"
                     class="w-full mt-2 p-4 rounded-2xl border border-gray-200 outline-none focus:border-pink-400"
+                    required
                 >
             </div>
             <div>
                 <label class="text-gray-600">Senha</label>
                 <input
                     type="password"
-                    name="senha"
-                    placeholder="Digite sua senha"
+                    name="password" placeholder="Digite sua senha"
                     class="w-full mt-2 p-4 rounded-2xl border border-gray-200 outline-none focus:border-pink-400"
+                    required
                 >
             </div>
             <button class="w-full bg-pink-500 hover:bg-pink-400 transition-all text-white font-bold py-4 rounded-2xl">
