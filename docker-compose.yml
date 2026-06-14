@@ -1,0 +1,36 @@
+services:
+  php:
+    build: .
+    container_name: petshop_laravel_php
+    ports:
+      - "8000:80"
+    volumes:
+      - ./:/var/www/html
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - rede_petshop
+
+  db:
+    image: mysql:8.0
+    container_name: petshop_laravel_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: petshop_laravel
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-proot"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - rede_petshop
+
+networks:
+  rede_petshop:
+
+volumes:
+  db_data:
