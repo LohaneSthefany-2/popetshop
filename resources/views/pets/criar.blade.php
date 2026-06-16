@@ -28,12 +28,12 @@
                 @csrf
                 <div>
                     <label class="text-gray-600 font-bold block ml-1">Nome do Pet</label>
-                    <input type="text" name="nomepet" placeholder="Digite o nome do bichinho..." required
+                    <input type="text" name="nomepet" placeholder="Digite o nome do pet..." required
                         class="w-full mt-2 p-4 rounded-2xl border-2 border-pink-100 outline-none focus:border-pink-400 bg-pink-50/30 font-medium placeholder-gray-400 transition-all">
                 </div>
                 <div>
                     <label class="text-gray-600 font-bold block ml-1">Dono</label>
-                    <input type="text" name="dono" placeholder="Quem é o dono dele?" required
+                    <input type="text" name="dono" placeholder="Digite o nome do dono do pet..." required
                         class="w-full mt-2 p-4 rounded-2xl border-2 border-pink-100 outline-none focus:border-pink-400 bg-pink-50/30 font-medium placeholder-gray-400 transition-all">
                 </div>
                 <div>
@@ -43,7 +43,7 @@
                 </div>
                 
                 <div>
-                    <label class="text-gray-600 font-bold block ml-1">Foto do Amiguinho</label>
+                    <label class="text-gray-600 font-bold block ml-1">Foto do pet</label>
                     <div class="mt-2 p-4 rounded-2xl border-2 border-dashed border-pink-300 bg-pink-50/20 text-center hover:bg-pink-50/50 transition-colors relative cursor-pointer">
                         <input type="file" name="foto" accept="image/*" required
                             class="absolute inset-0 opacity-0 cursor-pointer w-full h-full">
