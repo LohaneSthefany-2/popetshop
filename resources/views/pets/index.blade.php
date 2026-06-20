@@ -59,7 +59,7 @@
                         <td class="p-4">
                             <div class="flex justify-center gap-3">
                                 <a href="/pets/{{ $pet->id }}/editar" class="bg-yellow-400 hover:bg-yellow-300 text-white font-bold py-2 px-5 rounded-2xl shadow-sm hover:shadow-yellow-200 transition-all transform hover:scale-105">Editar</a>
-                                <form method="POST" action="/pets/{{ $pet->id }}" onsubmit="return confirm('Tem certeza que deseja apagar esse fofinho? 🥺')">
+                                <form method="POST" action="/pets/{{ $pet->id }}" onsubmit="return confirm('Tem certeza que deseja apagar esse pet?')">
                                     @csrf
                                     @method('DELETE')
                                     <button class="bg-red-400 hover:bg-red-300 text-white font-bold py-2 px-5 rounded-2xl shadow-sm hover:shadow-red-200 transition-all transform hover:scale-105">Deletar</button>

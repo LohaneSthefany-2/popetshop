@@ -6,20 +6,20 @@ use App\Http\Controllers\ConsultaController;
 use App\Http\Controllers\ClienteController;
 use Illuminate\Support\Facades\Route;
 
-// 1. Quando o usuário acessa o site, vai direto pro painel
+// Quando acessar "/", vai para o dashboard
 Route::get('/', function () {
     return redirect('/dashboard');
 });
 
-// 2. rotas protegidas (Dashboard, Pets e Consultas)
+// Rotas protegidas
 Route::middleware('auth')->group(function () {
-    
-    // dashboard
+
+    // Dashboard
     Route::get('/dashboard', function () {
-        return view('dashboard'); 
+        return view('dashboard');
     })->name('dashboard');
 
-    // rotas de Pets
+    // Pets
     Route::get('/pets', [PetController::class, 'index']);
     Route::get('/pets/criar', [PetController::class, 'create']);
     Route::post('/pets', [PetController::class, 'store']);
@@ -27,7 +27,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/pets/{id}', [PetController::class, 'update']);
     Route::delete('/pets/{id}', [PetController::class, 'destroy']);
 
-    // rotas de Consultas
+    // Consultas
     Route::get('/consultas', [ConsultaController::class, 'index']);
     Route::get('/consultas/criar', [ConsultaController::class, 'create']);
     Route::post('/consultas', [ConsultaController::class, 'store']);
@@ -35,13 +35,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/consultas/{id}', [ConsultaController::class, 'update']);
     Route::delete('/consultas/{id}', [ConsultaController::class, 'destroy']);
 
-    // Rotas de Perfil que o Breeze exige
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-
-     // Rotas de clientes
+    // Clientes
     Route::get('/clientes', [ClienteController::class, 'index'])->name('clientes.index');
     Route::get('/clientes/criar', [ClienteController::class, 'create'])->name('clientes.create');
     Route::post('/clientes', [ClienteController::class, 'store'])->name('clientes.store');
@@ -49,5 +43,12 @@ Route::middleware('auth')->group(function () {
     Route::put('/clientes/{cliente}', [ClienteController::class, 'update'])->name('clientes.update');
     Route::delete('/clientes/{cliente}', [ClienteController::class, 'destroy'])->name('clientes.destroy');
 
-// 3. Carrega as rotas automáticas de Login/Senha/Logout do Breeze
+    // Perfil
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+});
+
+// Rotas de login, registro, logout do Breeze
 require __DIR__.'/auth.php';
