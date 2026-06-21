@@ -23,9 +23,7 @@ class PetController extends Controller
     {
         $dados = $request->all();
 
-        // Verifica se o usuário enviou uma foto válida
         if ($request->hasFile('foto') && $request->file('foto')->isValid()) {
-            // Salva a imagem na pasta public/storage/pets
             $caminhoFoto = $request->foto->store('pets', 'public');
             $dados['foto'] = $caminhoFoto;
         }

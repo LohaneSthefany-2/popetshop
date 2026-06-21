@@ -7,21 +7,17 @@ use Illuminate\Http\Request;
 
 class ClienteController extends Controller
 {
-    // Mostrar a lista
     public function index()
     {
         $clientes = Cliente::all();
         return view('clientes.index', compact('clientes'));
     }
 
-    // Mostrar o formulário para cadastrar
     public function create()
     {
-        // CORRIGIDO: de 'clientes.crriar' para 'clientes.criar'
         return view('clientes.criar');
     }
 
-    // Receber os dados do formulário e salvar
     public function store(Request $request)
     {
         $request->validate([
@@ -37,13 +33,11 @@ class ClienteController extends Controller
         return redirect()->route('clientes.index')->with('sucesso', 'Cliente cadastrado com sucesso!');
     }
 
-    // Mostrar o formulário de edição com os dados do cliente preenchidos
     public function edit(Cliente $cliente)
     {
         return view('clientes.editar', compact('cliente'));
     }
 
-    // Receber as alterações do formulário e atualizar no banco de dados
     public function update(Request $request, Cliente $cliente)
     {
         $request->validate([
@@ -59,7 +53,6 @@ class ClienteController extends Controller
         return redirect()->route('clientes.index')->with('sucesso', 'Cliente atualizado com sucesso!');
     }
 
-    // Excluir o cliente do banco de dados
     public function destroy(Cliente $cliente)
     {
         $cliente->delete();
