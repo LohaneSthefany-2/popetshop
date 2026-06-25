@@ -2,8 +2,9 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Lista</title>
+    <title>Clientes</title>
     <script src="https://cdn.tailwindcss.com"></script>
+
     <style>
         .bg-custom {
             background-image: url('/images/listarcliente.jpg');
@@ -16,124 +17,159 @@
 
 <body class="min-h-screen bg-custom bg-pink-50/80 bg-blend-overlay antialiased text-gray-600">
 
+    <!-- NAV -->
     <nav class="bg-white/85 backdrop-blur-md shadow-sm p-4 sticky top-0 z-50 flex justify-between items-center border-b border-pink-100">
-        <div class="flex items-center gap-2">
-            <h1 class="text-2xl font-black bg-gradient-to-r from-pink-500 to-rose-400 bg-clip-text text-transparent tracking-wide drop-shadow-sm">
-                Petshop
-            </h1>
-        </div>
+        <h1 class="text-2xl font-black bg-gradient-to-r from-pink-500 to-rose-400 bg-clip-text text-transparent">
+            Petshop
+        </h1>
 
         <a href="{{ route('dashboard') }}"
-           class="text-gray-500 hover:text-pink-500 font-bold text-sm transition-all hover:scale-105">
-            Voltar para o Painel
+           class="text-gray-500 hover:text-pink-500 font-bold text-sm transition">
+            Voltar
         </a>
     </nav>
 
     <div class="p-6 md:p-12 max-w-6xl mx-auto">
 
+        <!-- ALERTA -->
         @if(session('sucesso'))
-            <div class="bg-green-50 border border-green-200 text-green-700 px-6 py-4 rounded-2xl mb-6 text-center font-bold shadow-sm">
-                {{ session('sucesso') }}
+            <div id="alerta"
+                 class="mb-6 bg-emerald-50 border border-emerald-200 text-emerald-700 px-6 py-4 rounded-2xl shadow-md flex items-center gap-4">
+
+                <div class="bg-emerald-100 p-2 rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         class="w-6 h-6 text-emerald-600"
+                         fill="none"
+                         viewBox="0 0 24 24"
+                         stroke="currentColor">
+                        <path stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M5 13l4 4L19 7"/>
+                    </svg>
+                </div>
+
+                <div>
+                    <p class="font-bold">Sucesso!</p>
+                    <p>{{ session('sucesso') }}</p>
+                </div>
             </div>
         @endif
 
+        <!-- HEADER -->
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+
             <div>
-                <h2 class="text-3xl font-extrabold text-gray-800 drop-shadow-sm">
+                <h2 class="text-3xl font-extrabold text-gray-800">
                     Clientes Cadastrados
                 </h2>
-                <p class="text-gray-400 font-medium text-sm mt-1">
+                <p class="text-gray-400 text-sm mt-1">
                     Gerencie os clientes do petshop
                 </p>
             </div>
 
             <a href="{{ route('clientes.create') }}"
-               class="w-full sm:w-auto text-center bg-gradient-to-r from-pink-500 to-rose-400 hover:from-pink-600 hover:to-rose-500 shadow-md transition-all text-white font-black px-6 py-3.5 rounded-xl transform hover:-translate-y-0.5 active:scale-95">
-                Novo Cliente
+               class="bg-gradient-to-r from-pink-500 to-rose-400 hover:from-pink-600 hover:to-rose-500 text-white font-black px-6 py-3 rounded-xl shadow-md transition active:scale-95">
+                + Novo Cliente
             </a>
         </div>
 
-        <div class="bg-white/95 backdrop-blur-md rounded-[2rem] shadow-xl border border-pink-100/60 overflow-hidden">
+        <!-- TABELA -->
+        <div class="bg-white/95 backdrop-blur-md rounded-[2rem] shadow-xl border border-pink-100 overflow-hidden">
+
             <div class="overflow-x-auto">
-                <table class="w-full text-left border-collapse">
+
+                <table class="w-full text-left">
 
                     <thead>
-                        <tr class="bg-gradient-to-r from-pink-50/60 to-rose-50/40 border-b border-pink-100/80 text-pink-600 font-black text-sm uppercase tracking-wider">
-                            <th class="p-5">Nome do Tutor</th>
+                        <tr class="bg-pink-50 text-pink-600 uppercase text-sm font-bold">
+                            <th class="p-5">Nome</th>
                             <th class="p-5">E-mail</th>
-                            <th class="p-5">Telefone / WhatsApp</th>
+                            <th class="p-5">Telefone</th>
                             <th class="p-5">CPF</th>
                             <th class="p-5 text-center">Ações</th>
                         </tr>
                     </thead>
 
-                    <tbody class="divide-y divide-pink-50/50">
+                    <tbody class="divide-y divide-pink-50">
 
-                        @if($clientes->count() > 0)
+                        @forelse($clientes as $cliente)
 
-                            @foreach($clientes as $cliente)
-                                <tr class="hover:bg-pink-50/20 transition-all font-medium text-gray-700">
+                            <tr class="hover:bg-pink-50/30 transition">
 
-                                    <td class="p-5 font-bold text-gray-800">
-                                        <div class="flex items-center gap-2">
-                                            <div class="w-2 h-2 rounded-full bg-pink-400"></div>
-                                            {{ $cliente->nome }}
-                                        </div>
-                                    </td>
+                                <td class="p-5 font-bold text-gray-800">
+                                    {{ $cliente->nome }}
+                                </td>
 
-                                    <td class="p-5 text-gray-500 text-sm">
-                                        {{ $cliente->email }}
-                                    </td>
+                                <td class="p-5 text-sm">
+                                    {{ $cliente->email }}
+                                </td>
 
-                                    <td class="p-5 text-gray-500 text-sm">
-                                        {{ $cliente->telefone }}
-                                    </td>
+                                <td class="p-5 text-sm">
+                                    {{ $cliente->telefone }}
+                                </td>
 
-                                    <td class="p-5 text-gray-400 text-sm">
-                                        {{ $cliente->cpf ?? 'Não informado' }}
-                                    </td>
+                                <td class="p-5 text-sm text-gray-400">
+                                    {{ $cliente->cpf ?? 'Não informado' }}
+                                </td>
 
-                                    <td class="p-5">
-                                        <div class="flex justify-center items-center gap-2.5">
+                                <td class="p-5">
+                                    <div class="flex justify-center gap-2">
 
-                                            <a href="{{ route('clientes.edit', $cliente->id) }}"
-                                               class="bg-amber-100 hover:bg-amber-400 text-amber-700 hover:text-white font-bold px-4 py-2 rounded-xl text-xs transition-all">
-                                                Editar
-                                            </a>
+                                        <a href="{{ route('clientes.edit', $cliente->id) }}"
+                                           class="bg-amber-100 hover:bg-amber-400 text-amber-700 hover:text-white px-4 py-2 rounded-xl text-xs font-bold transition">
+                                            Editar
+                                        </a>
 
-                                            <form action="{{ route('clientes.destroy', $cliente->id) }}"
-                                                  method="POST"
-                                                  class="inline">
-                                                @csrf
-                                                @method('DELETE')
+                                        <form action="{{ route('clientes.destroy', $cliente->id) }}"
+                                              method="POST"
+                                              onsubmit="return confirm('Tem certeza que deseja excluir este cliente?')">
 
-                                                <button type="submit"
-                                                        onclick="return confirm('Tem certeza que deseja excluir este cliente?')"
-                                                        class="bg-rose-50 hover:bg-rose-500 text-rose-600 hover:text-white font-bold px-4 py-2 rounded-xl text-xs transition-all">
-                                                    Deletar
-                                                </button>
-                                            </form>
+                                            @csrf
+                                            @method('DELETE')
 
-                                        </div>
-                                    </td>
+                                            <button type="submit"
+                                                    class="bg-rose-100 hover:bg-rose-500 text-rose-600 hover:text-white px-4 py-2 rounded-xl text-xs font-bold transition">
+                                                Excluir
+                                            </button>
 
-                                </tr>
-                            @endforeach
+                                        </form>
 
-                        @else
+                                    </div>
+                                </td>
+
+                            </tr>
+
+                        @empty
+
                             <tr>
-                                <td colspan="5" class="p-12 text-center text-gray-400 font-bold">
+                                <td colspan="5" class="p-10 text-center text-gray-400 font-bold">
                                     Nenhum cliente cadastrado ainda.
                                 </td>
                             </tr>
-                        @endif
+
+                        @endforelse
 
                     </tbody>
 
                 </table>
+
             </div>
         </div>
     </div>
 
+    <!-- ALERTA AUTO REMOVE -->
+    <script>
+        setTimeout(() => {
+            const alerta = document.getElementById('alerta');
+
+            if (alerta) {
+                alerta.classList.add('opacity-0', 'transition', 'duration-500');
+                setTimeout(() => alerta.remove(), 500);
+            }
+        }, 3000);
+    </script>
+
 </body>
 </html>
+
