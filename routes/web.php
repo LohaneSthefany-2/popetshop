@@ -20,20 +20,20 @@ Route::middleware('auth')->group(function () {
     })->name('dashboard');
 
     // Pets
-    Route::get('/pets', [PetController::class, 'index']);
-    Route::get('/pets/criar', [PetController::class, 'create']);
-    Route::post('/pets', [PetController::class, 'store']);
-    Route::get('/pets/{id}/editar', [PetController::class, 'edit']);
-    Route::put('/pets/{id}', [PetController::class, 'update']);
-    Route::delete('/pets/{id}', [PetController::class, 'destroy']);
+    Route::get('/pets', [PetController::class, 'index'])->name('pets.index');
+    Route::get('/pets/criar', [PetController::class, 'create'])->name('pets.create');
+    Route::post('/pets', [PetController::class, 'store'])->name('pets.store');
+    Route::get('/pets/{pet}/editar', [PetController::class, 'edit'])->name('pets.edit');
+    Route::put('/pets/{pet}', [PetController::class, 'update'])->name('pets.update');
+    Route::delete('/pets/{pet}', [PetController::class, 'destroy'])->name('pets.destroy');
 
     // Consultas
-    Route::get('/consultas', [ConsultaController::class, 'index']);
-    Route::get('/consultas/criar', [ConsultaController::class, 'create']);
-    Route::post('/consultas', [ConsultaController::class, 'store']);
-    Route::get('/consultas/{id}/editar', [ConsultaController::class, 'edit']);
-    Route::put('/consultas/{id}', [ConsultaController::class, 'update']);
-    Route::delete('/consultas/{id}', [ConsultaController::class, 'destroy']);
+    Route::get('/consultas', [ConsultaController::class, 'index'])->name('consultas.index');
+    Route::get('/consultas/criar', [ConsultaController::class, 'create'])->name('consultas.create');
+    Route::post('/consultas', [ConsultaController::class, 'store'])->name('consultas.store');
+    Route::get('/consultas/{consulta}/editar', [ConsultaController::class, 'edit'])->name('consultas.edit');
+    Route::put('/consultas/{consulta}', [ConsultaController::class, 'update'])->name('consultas.update');
+    Route::delete('/consultas/{consulta}', [ConsultaController::class, 'destroy'])->name('consultas.destroy');
 
     // Clientes
     Route::get('/clientes', [ClienteController::class, 'index'])->name('clientes.index');
@@ -47,8 +47,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
 });
 
-// Rotas de login, registro, logout do Breeze
+// Rotas de autenticação do Breeze
 require __DIR__.'/auth.php';
