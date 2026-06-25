@@ -17,7 +17,6 @@
 
 <body class="min-h-screen bg-custom bg-pink-50/90 bg-blend-overlay antialiased">
 
-    <!-- NAV -->
     <nav class="bg-white/90 backdrop-blur-sm shadow-md p-5 flex justify-between items-center border-b border-pink-100">
         <h1 class="text-2xl font-black text-pink-500">Petshop</h1>
 
@@ -29,7 +28,6 @@
 
     <div class="p-10 max-w-6xl mx-auto">
 
-        <!-- ALERTA -->
         @if(session('sucesso'))
             <div id="alerta"
                  class="mb-6 bg-emerald-50 border border-emerald-200 text-emerald-700 px-6 py-4 rounded-2xl shadow-md flex items-center gap-4">
@@ -54,7 +52,6 @@
             </div>
         @endif
 
-        <!-- HEADER -->
         <div class="flex justify-between items-center mb-8 bg-white/40 backdrop-blur-sm p-4 rounded-3xl">
 
             <div>
@@ -69,7 +66,6 @@
             </a>
         </div>
 
-        <!-- TABELA -->
         <div class="bg-white/95 backdrop-blur-sm rounded-[2rem] shadow-xl overflow-hidden border border-pink-100">
 
             <table class="w-full">
@@ -146,8 +142,7 @@
 
         </div>
     </div>
-
-    <!-- ALERTA AUTO REMOVE -->
+    
     <script>
         setTimeout(() => {
             const alerta = document.getElementById('alerta');

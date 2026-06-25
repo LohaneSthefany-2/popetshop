@@ -17,7 +17,6 @@
 
 <body class="min-h-screen bg-custom bg-pink-50/80 bg-blend-overlay antialiased text-gray-600">
 
-    <!-- NAV -->
     <nav class="bg-white/85 backdrop-blur-md shadow-sm p-4 sticky top-0 z-50 flex justify-between items-center border-b border-pink-100">
         <h1 class="text-2xl font-black bg-gradient-to-r from-pink-500 to-rose-400 bg-clip-text text-transparent">
             Petshop
@@ -31,7 +30,6 @@
 
     <div class="p-6 md:p-12 max-w-6xl mx-auto">
 
-        <!-- ALERTA -->
         @if(session('sucesso'))
             <div id="alerta"
                  class="mb-6 bg-emerald-50 border border-emerald-200 text-emerald-700 px-6 py-4 rounded-2xl shadow-md flex items-center gap-4">
@@ -56,7 +54,6 @@
             </div>
         @endif
 
-        <!-- HEADER -->
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
 
             <div>
@@ -74,7 +71,6 @@
             </a>
         </div>
 
-        <!-- TABELA -->
         <div class="bg-white/95 backdrop-blur-md rounded-[2rem] shadow-xl border border-pink-100 overflow-hidden">
 
             <div class="overflow-x-auto">
