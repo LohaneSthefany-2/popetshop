@@ -21,6 +21,13 @@ class PetController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'nomepet' => 'required|string|max:255',
+            'dono' => 'required|string|max:255',
+            'tipo' => 'required|string|max:255',
+            'foto' => 'nullable|image|max:2048',
+        ]);
+
         $dados = $request->all();
 
         if ($request->hasFile('foto') && $request->file('foto')->isValid()) {
@@ -29,18 +36,23 @@ class PetController extends Controller
         }
 
         Pet::create($dados);
-        return redirect('/pets');
+        return redirect('/pets')->with('sucesso', 'Pet cadastrado com sucesso!');
     }
 
-    public function edit($id)
+    public function edit(Pet $pet)
     {
-        $pet = Pet::findOrFail($id);
         return view('pets.editar', compact('pet'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Pet $pet)
     {
-        $pet = Pet::findOrFail($id);
+        $request->validate([
+            'nomepet' => 'required|string|max:255',
+            'dono' => 'required|string|max:255',
+            'tipo' => 'required|string|max:255',
+            'foto' => 'nullable|image|max:2048',
+        ]);
+
         $dados = $request->all();
 
         if ($request->hasFile('foto') && $request->file('foto')->isValid()) {
@@ -52,18 +64,16 @@ class PetController extends Controller
         }
 
         $pet->update($dados);
-        return redirect('/pets');
+        return redirect('/pets')->with('sucesso', 'Pet atualizado com sucesso!');
     }
 
-    public function destroy($id)
+    public function destroy(Pet $pet)
     {
-        $pet = Pet::findOrFail($id);
-
         if ($pet->foto) {
             Storage::disk('public')->delete($pet->foto);
         }
 
         $pet->delete();
-        return redirect('/pets');
+        return redirect('/pets')->with('sucesso', 'Pet excluído com sucesso!');
     }
 }

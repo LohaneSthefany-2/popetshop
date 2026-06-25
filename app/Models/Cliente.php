@@ -16,9 +16,5 @@ class Cliente extends Model
         'cpf', 
         'endereco'
     ];
-
-    public function pets()
-    {
-        return $this->hasMany(Pet::class);
-    }
+    
 }

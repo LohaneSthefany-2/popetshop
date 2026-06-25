@@ -20,26 +20,39 @@ class ConsultaController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'nomepet' => 'required|string|max:255',
+            'dataconsulta' => 'required|date',
+            'descricao' => 'required|string',
+        ]);
+
         Consulta::create($request->all());
-        return redirect('/consultas');
+
+        return redirect('/consultas')->with('sucesso', 'Consulta cadastrada com sucesso!');
     }
 
-    public function edit($id)
+    public function edit(Consulta $consulta)
     {
-        $consulta = Consulta::findOrFail($id);
         return view('consultas.editar', compact('consulta'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Consulta $consulta)
     {
-        $consulta = Consulta::findOrFail($id);
+        $request->validate([
+            'nomepet' => 'required|string|max:255',
+            'dataconsulta' => 'required|date',
+            'descricao' => 'required|string',
+        ]);
+
         $consulta->update($request->all());
-        return redirect('/consultas');
+
+        return redirect('/consultas')->with('sucesso', 'Consulta atualizada com sucesso!');
     }
 
-    public function destroy($id)
+    public function destroy(Consulta $consulta)
     {
-        Consulta::findOrFail($id)->delete();
-        return redirect('/consultas');
+        $consulta->delete();
+
+        return redirect('/consultas')->with('sucesso', 'Consulta excluída com sucesso!');
     }
 }

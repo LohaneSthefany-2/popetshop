@@ -17,7 +17,6 @@
     
     <nav class="bg-white/85 backdrop-blur-md shadow-sm p-4 sticky top-0 z-50 flex justify-between items-center border-b border-pink-100">
         <div class="flex items-center gap-2">
-            <span class="text-2xl">🐾</span>
             <h1 class="text-2xl font-black bg-gradient-to-r from-pink-500 to-rose-400 bg-clip-text text-transparent tracking-wide drop-shadow-sm">Petshop</h1>
         </div>
     </nav>

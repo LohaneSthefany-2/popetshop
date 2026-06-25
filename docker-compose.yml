@@ -29,6 +29,20 @@ services:
     networks:
       - rede_petshop
 
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: petshop_phpmyadmin
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: root
+    depends_on:
+      - db
+    networks:
+      - rede_petshop
+
 networks:
   rede_petshop:
 
